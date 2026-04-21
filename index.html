@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>顧客管理システム | Mr.リフォームマン</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>顧客管理システム</h1>
+      <span class="brand">Mr.リフォームマン</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="form-section">
+      <h2 id="form-title">顧客を追加</h2>
+      <form id="customer-form">
+        <input type="hidden" id="edit-id">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">お客様名 <span class="required">*</span></label>
+            <input type="text" id="name" placeholder="例：山田 太郎" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">電話番号 <span class="required">*</span></label>
+            <input type="tel" id="phone" placeholder="例：090-1234-5678" required>
+          </div>
+          <div class="form-group full-width">
+            <label for="address">住所 <span class="required">*</span></label>
+            <input type="text" id="address" placeholder="例：東京都新宿区1-2-3" required>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="submit-btn">追加する</button>
+          <button type="button" id="cancel-btn" class="hidden">キャンセル</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="list-section">
+      <div class="list-header">
+        <h2>顧客一覧</h2>
+        <div class="search-box">
+          <input type="text" id="search" placeholder="名前・電話番号・住所で検索">
+        </div>
+      </div>
+      <div id="customer-count" class="customer-count"></div>
+      <div class="table-wrapper">
+        <table id="customer-table">
+          <thead>
+            <tr>
+              <th>お客様名</th>
+              <th>電話番号</th>
+              <th>住所</th>
+              <th>登録日</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="customer-list"></tbody>
+        </table>
+        <div id="empty-state" class="empty-state hidden">
+          <p>顧客が登録されていません</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
