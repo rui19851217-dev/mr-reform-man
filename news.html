@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>建築ニュース | Mr.リフォームマン</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="news.css">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>建築ニュース</h1>
+      <div class="header-right">
+        <a href="index.html" class="header-nav-link">顧客管理</a>
+        <span class="brand">Mr.リフォームマン</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="news-main">
+    <div class="news-toolbar">
+      <div class="tabs">
+        <button class="tab active" data-tab="shinchiku">🏠 新築</button>
+        <button class="tab" data-tab="reform">🔨 リフォーム</button>
+      </div>
+      <div class="toolbar-right">
+        <span id="last-updated" class="last-updated"></span>
+        <button id="refresh-btn" class="btn-refresh">
+          <span id="refresh-icon">↻</span> 更新
+        </button>
+      </div>
+    </div>
+
+    <div id="panel-shinchiku" class="news-panel">
+      <div id="list-shinchiku" class="news-list"></div>
+    </div>
+
+    <div id="panel-reform" class="news-panel hidden">
+      <div id="list-reform" class="news-list"></div>
+    </div>
+  </main>
+
+  <script src="news.js"></script>
+</body>
+</html>
