@@ -3,7 +3,7 @@ const FEEDS = {
   reform: 'https://news.google.com/rss/search?q=リフォーム&hl=ja&gl=JP&ceid=JP:ja'
 };
 
-const API_BASE = 'https://api.rss2json.com/v1/api.json';
+const PROXY = 'https://api.allorigins.win/get?url=';
 const CACHE_TTL = 30 * 60 * 1000;
 
 let activeTab = 'shinchiku';
@@ -129,14 +129,25 @@ async function loadNews(category, forceRefresh = false) {
   setRefreshState(true);
 
   try {
-    const url = `${API_BASE}?rss_url=${encodeURIComponent(FEEDS[category])}&count=20`;
-    const res = await fetch(url);
+    const res = await fetch(PROXY + encodeURIComponent(FEEDS[category]));
     if (!res.ok) throw new Error('Network error');
-    const data = await res.json();
-    if (data.status !== 'ok') throw new Error('Feed error');
+    const json = await res.json();
+    if (!json.contents) throw new Error('Empty response');
 
-    setCache(`news-${category}`, data.items);
-    renderNews(container, data.items);
+    const xml = new DOMParser().parseFromString(json.contents, 'text/xml');
+    if (xml.querySelector('parsererror')) throw new Error('XML parse error');
+
+    const text = (el, tag) => el.getElementsByTagName(tag)[0]?.textContent?.trim() || '';
+    const items = Array.from(xml.querySelectorAll('item')).slice(0, 20).map(item => ({
+      title: text(item, 'title'),
+      link: text(item, 'link'),
+      pubDate: text(item, 'pubDate'),
+      description: text(item, 'description'),
+      author: text(item, 'source')
+    })).filter(item => item.title);
+
+    setCache(`news-${category}`, items);
+    renderNews(container, items);
     updateLastUpdated();
   } catch {
     renderError(container);
