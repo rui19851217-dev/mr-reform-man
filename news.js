@@ -1,6 +1,6 @@
 const FEEDS = {
-  shinchiku: 'https://news.google.com/rss/search?q=新築+建築+住宅&hl=ja&gl=JP&ceid=JP:ja',
-  reform: 'https://news.google.com/rss/search?q=リフォーム+住宅+改築+改修&hl=ja&gl=JP&ceid=JP:ja'
+  shinchiku: 'https://news.google.com/rss/search?q=新築&hl=ja&gl=JP&ceid=JP:ja',
+  reform: 'https://news.google.com/rss/search?q=リフォーム&hl=ja&gl=JP&ceid=JP:ja'
 };
 
 const API_BASE = 'https://api.rss2json.com/v1/api.json';
